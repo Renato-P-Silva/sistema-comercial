@@ -12,3 +12,4 @@ class CargoController extends Controller
     public function listarCargos(){
       $cargos = \App\Cargo::all();
   }
+}

@@ -30,6 +30,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categoria
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{URL('cadastrar/categoria/')}}">Cadastrar</a>
+                        <a class="dropdown-item" href="{{URL('listar/categoria/')}}">Listar</a>
+                    </div>
+                </li>
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
