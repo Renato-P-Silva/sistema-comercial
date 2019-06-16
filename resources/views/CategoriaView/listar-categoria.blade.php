@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <div class="shadow p-4 mb-5 bg-white rounded container-fluid" style="overflow-x: auto;">
-    
-	<h1> Lista de Turmas </h1><br><br>
+
+	<h1> Lista de Categorias </h1><br><br>
 	<table class="table">
  		<thead>
 			<tr>
@@ -15,7 +15,7 @@
 			<tr>
 				<td>{{$categoria->id}}</td>
 				<td>{{$categoria->nome}}</td>
-				<td> 
+				<td>
 					<a href="/editar/categoria/{{$categoria->id}}">Editar</a> -
 					<a href="/remover/categoria/{{$categoria->id}}">Remover</a>
 				</td>

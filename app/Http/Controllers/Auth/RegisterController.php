@@ -70,12 +70,12 @@ class RegisterController extends Controller
         $funcionario->email = $data['email'];
         $funcionario->cpf = $data['cpf'];
         $funcionario->password = Hash::make($data['password']);
-        //Cargo
-        $cargo = new \App\Cargo();
-        $cargo->nome = $data['cargo'];
-        $cargo->save();
+        // //Cargo
+        // $cargo = new \App\Cargo();
+        // $cargo->nome = $data['cargo'];
+        // $cargo->save();
 
-        $funcionario->cargo_id = $cargo->id;
+        $funcionario->cargo_id = $data['cargo_id'];
         $funcionario->save();
 
         return $funcionario;
