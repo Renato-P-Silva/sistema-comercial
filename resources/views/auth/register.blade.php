@@ -55,19 +55,27 @@
                                 @endif
                             </div>
                         </div>
-
+                        @php
+                        $cargos = \App\Cargo::all();
+                        @endphp
                         <div class="form-group row">
-                            <label for="cargo" class="col-md-4 col-form-label text-md-right">{{ __('Cargo') }}</label>
-
-                            <div class="col-md-6">
-                              <input id="cargo" type="text" class="form-control" name="cargo" value="{{ old('cargo') }}" required autofocus>
-
-                              @if ($errors->has('cargo'))
-                                  <span class="help-block">
-                                      <strong>{{ $errors->first('cargo') }}</strong>
-                                  </span>
+                              <label for="cargo_id" class="col-md-2 col-form-label text-md-right">{{ __('Cargo') }}</label>
+                              @if(count($cargos) != 0 and count($cargos) != 0)
+                              <div class="col-md-6">
+                                <select class="form-control" id="cargos" name="cargo_id" required>
+        								              <option value="">Selecione um cargo</option>
+        								              @foreach($cargos as $cargo)
+        									            <option value="{{$cargo->id}}">{{$cargo->nome}}</option>
+        								              @endforeach
+                                </select>
+                              </div>
+                              @else
+                              <div class="col-md-6">
+                                <select class="form-control" id="cargos" name="cargo_id" required>
+        								              <option value="">Não há cargos cadastrados</option>
+                                </select>
+                              </div>
                               @endif
-                            </div>
                         </div>
 
                         <div class="form-group row">
