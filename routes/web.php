@@ -34,3 +34,12 @@ Route::post('/salvar/cargo', 'CargoController@cadastrar_cargo');
 Route::get('/editar/cargo/{id}', 'CargoController@view_editar_cargo')->middleware('auth');
 Route::post('/atualizar/cargo','CargoController@editar_cargo')->middleware('auth');
 Route::get('/remover/cargo/{id}', 'CargoController@remover_cargo')->middleware('auth');
+
+//ROTAS DE CLIENTE
+
+Route::get('/listar/cliente', 'ClienteController@listar_cliente')->middleware('auth');
+Route::get('/cadastrar/cliente', 'ClienteController@view_cadastrar_cliente');
+Route::post('/salvar/cliente', 'ClienteController@cadastrar_cliente');
+Route::get('/editar/cliente/{id}', 'ClienteController@view_editar_cliente')->middleware('auth');
+Route::post('/atualizar/cliente','ClienteController@editar_cliente')->middleware('auth');
+Route::get('/remover/cliente/{id}', 'ClienteController@remover_cliente')->middleware('auth');
