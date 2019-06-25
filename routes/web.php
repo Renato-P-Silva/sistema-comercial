@@ -35,7 +35,6 @@ Route::get('/editar/cargo/{id}', 'CargoController@view_editar_cargo')->middlewar
 Route::post('/atualizar/cargo','CargoController@editar_cargo')->middleware('auth');
 Route::get('/remover/cargo/{id}', 'CargoController@remover_cargo')->middleware('auth');
 
-
 //----ROTAS DE PEDIDO
 
 Route::get('/listar/pedido', 'PedidoController@listar_pedidos')->middleware('auth');
@@ -45,6 +44,11 @@ Route::get('/remover/pedido/{id}', 'PedidoController@remover_pedido')->middlewar
 Route::post('/atualizar/pedido', 'PedidoController@atualizar_pedido')->middleware('auth');
 Route::get('/editar/pedido/{id}', 'PedidoController@get_view_atualizar')->middleware('auth');
 
+//ROTAS DE CLIENTE
 
-
-
+Route::get('/listar/cliente', 'ClienteController@listar_cliente')->middleware('auth');
+Route::get('/cadastrar/cliente', 'ClienteController@view_cadastrar_cliente');
+Route::post('/salvar/cliente', 'ClienteController@cadastrar_cliente');
+Route::get('/editar/cliente/{id}', 'ClienteController@view_editar_cliente')->middleware('auth');
+Route::post('/atualizar/cliente','ClienteController@editar_cliente')->middleware('auth');
+Route::get('/remover/cliente/{id}', 'ClienteController@remover_cliente')->middleware('auth');
