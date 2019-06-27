@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cliente;
+use App\Endereco;
+use App\Validator\ClienteValidator;
 
 class ClienteController extends Controller
 {
@@ -12,15 +15,14 @@ class ClienteController extends Controller
 
                 ClienteValidator::Validate($request->all());
 
-                
+
                 $cliente = new Cliente();
                 $endereco = new  Endereco();
-
-                $cliente->nome = $request->get('nome');
+                $cliente->nome = $request->nome;
                 $cliente->cpf = $request->get('cpf');
                 $cliente->email = $request->get('email');
                 $cliente->telefone = $request->get('telefone');
-                
+
                 $endereco->cidade = $request->get('cidade');
                 $endereco->logradouro = $request->get('logradouro');
                 $endereco->estado = $request->get('estado');
@@ -28,9 +30,9 @@ class ClienteController extends Controller
                 $endereco->numero = $request->get('numero');
                 $endereco->save();
 
-                $cliente->endereco_id = $endereco->id; 
-                $cliente->save();               
-             
+                $cliente->endereco_id = $endereco->id;
+                $cliente->save();
+
                 return redirect('listar/cliente');
 
             } catch (ValidationException $ex) {
@@ -45,7 +47,7 @@ class ClienteController extends Controller
 
         public function listar_cliente(){
             $clientes = Cliente::all();
-            return view('/clienteView/listar-cliente', ['clientes' => $clientes]);
+            return view('/ClienteView/listar-cliente', ['clientes' => $clientes]);
         }
 
         public function remover_cliente(Request $request){
@@ -56,7 +58,8 @@ class ClienteController extends Controller
 
         public function view_editar_cliente(Request $request){
             $cliente = Cliente::find($request->id);
-            return view('/ClienteView/editar-cliente',['cliente' =>$cliente]);
+            $endereco = Endereco::find($cliente->endereco_id);
+            return view('/ClienteView/editar-cliente',['cliente' =>$cliente, 'endereco' => $endereco]);
         }
         public function editar_cliente(Request $request){
             try{
@@ -78,7 +81,7 @@ class ClienteController extends Controller
                 $endereco->numero = $request->get('numero');
                 $endereco->update();
 
-      
+
                 return redirect("listar/cliente");
             }
             catch(ValidationException $ex){

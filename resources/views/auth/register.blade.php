@@ -59,7 +59,7 @@
                         $cargos = \App\Cargo::all();
                         @endphp
                         <div class="form-group row">
-                              <label for="cargo_id" class="col-md-2 col-form-label text-md-right">{{ __('Cargo') }}</label>
+                              <label for="cargo_id" class="col-md-4 col-form-label text-md-right">{{ __('Cargo') }}</label>
                               @if(count($cargos) != 0 and count($cargos) != 0)
                               <div class="col-md-6">
                                 <select class="form-control" id="cargos" name="cargo_id" required>
