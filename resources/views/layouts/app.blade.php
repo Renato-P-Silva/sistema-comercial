@@ -42,6 +42,16 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Produto
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{URL('cadastrar/produto/')}}">Cadastrar</a>
+                        <a class="dropdown-item" href="{{URL('listar/produto/')}}">Listar</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Cargo
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">

@@ -27,6 +27,14 @@ Route::get('/editar/categoria/{id}', 'CategoriaController@view_editar_categoria'
 Route::post('/atualizar/categoria','CategoriaController@editar_categoria')->middleware('auth');
 Route::get('/remover/categoria/{id}', 'CategoriaController@remover_categoria')->middleware('auth');
 
+//----ROTAS DE CATEGORIA
+Route::get('/listar/produto', 'ProdutoController@listar_produto')->middleware('auth');
+Route::get('/cadastrar/produto', 'ProdutoController@view_cadastrar_produto')->middleware('auth');
+Route::post('/salvar/produto', 'ProdutoController@cadastrar_produto')->middleware('auth');
+Route::get('/editar/produto/{id}', 'ProdutoController@view_editar_produto')->middleware('auth');
+Route::post('/atualizar/produto','ProdutoController@editar_produto')->middleware('auth');
+Route::get('/remover/produto/{id}', 'ProdutoController@remover_produto')->middleware('auth');
+
 //----ROTAS DE CARGO
 Route::get('/listar/cargo', 'CargoController@listar_cargo')->middleware('auth');
 Route::get('/cadastrar/cargo', 'CargoController@view_cadastrar_cargo');
