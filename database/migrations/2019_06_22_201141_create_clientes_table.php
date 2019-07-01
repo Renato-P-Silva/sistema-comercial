@@ -19,7 +19,7 @@ class CreateClientesTable extends Migration
             $table->string('cpf')->unique();
             $table->string('email');
             $table->string('telefone');
-            $table->integer('endereco_id')->unsigned();
+            $table->integer('endereco_id')->unsigned()->nullable();
             $table->foreign('endereco_id')->references('id')->on('enderecos')->onDelete('cascade');
             $table->timestamps();
     

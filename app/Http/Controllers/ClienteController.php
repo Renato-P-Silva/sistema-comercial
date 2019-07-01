@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Cliente;
 use App\Endereco;
 use App\Validator\ClienteValidator;
+use App\Validator\ValidationException;
 
 class ClienteController extends Controller
 {

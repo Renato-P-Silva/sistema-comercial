@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Produto;
 use App\Categoria;
 use Illuminate\Http\Request;
+use App\Validator\ValidationException;
 use App\Validator\ProdutoValidator;
 
 class ProdutoController extends Controller
@@ -19,8 +20,7 @@ class ProdutoController extends Controller
             $produto->preco = $request->preco;
             $produto->save();
             return redirect("listar/produto");
-        }
-        catch(ValidationException $ex){
+        }catch(ValidationException $ex){
             return redirect("cadastrar/produto")->withErrors($ex->getValidator())->withInput();
         }
     }
