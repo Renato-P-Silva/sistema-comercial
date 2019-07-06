@@ -14,25 +14,26 @@ class ClienteController extends Controller
         {
             try {
 
-                ClienteValidator::Validate($request->all());
+                //ClienteValidator::Validate($request->all());
 
 
                 $cliente = new Cliente();
                 $endereco = new  Endereco();
                 $cliente->nome = $request->nome;
-                $cliente->cpf = $request->get('cpf');
-                $cliente->email = $request->get('email');
-                $cliente->telefone = $request->get('telefone');
-
-                $endereco->cidade = $request->get('cidade');
-                $endereco->logradouro = $request->get('logradouro');
-                $endereco->estado = $request->get('estado');
-                $endereco->bairro = $request->get('bairro');
-                $endereco->numero = $request->get('numero');
-                $endereco->save();
-
-                $cliente->endereco_id = $endereco->id;
+                $cliente->cpf = $request->cpf;
+                $cliente->email = $request->email;
+                $cliente->telefone = $request->telefone;
                 $cliente->save();
+
+                $endereco->cidade = $request->cidade;
+                $endereco->logradouro = $request->logradouro;
+                $endereco->estado = $request->estado;
+                $endereco->bairro = $request->bairro;
+                $endereco->numero = $request->numero;
+
+
+                $endereco->cliente_id = $cliente->id;
+                $endereco->save();
 
                 return redirect('listar/cliente');
 
@@ -90,9 +91,28 @@ class ClienteController extends Controller
             }
         }
 
+        public function gerar_relatorio_cidade(Request $request){
+            $enderecos = Endereco::where('cidade', 'ilike', '%' . $request->cidade . '%')
+													->get();
+            $clientes = array();
+            foreach ($enderecos as $endereco) {
+              $cliente = \App\Cliente::find($endereco->cliente_id);
+              array_push($clientes, $cliente);
+            }
+            return view('/ClienteView/relatorio-cliente-resultado', ['clientes' => $clientes]);
+        }
 
+        public function gerar_relatorio_bairro(Request $request){
+            $enderecos = Endereco::where('bairro', 'ilike', '%' . $request->bairro . '%')
+													->get();
 
+            $clientes = array();
+            foreach ($enderecos as $endereco) {
+              $cliente = \App\Cliente::find($endereco->cliente_id);
+              array_push($clientes, $cliente);
+            }
 
-
+            return view('/ClienteView/relatorio-cliente-resultado', ['clientes' => $clientes]);
+        }
 
     }

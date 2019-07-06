@@ -2,6 +2,11 @@
 @section('content')
     <div class="shadow p-4 mb-5 bg-white rounded container-fluid" style="overflow-x: auto;">
 
+      @if(count($clientes) == 0 and count($clientes) == 0)
+          <div class="alert alert-danger">
+                      Não foram encontrados clientes com este termo de busca.
+          </div>
+      @else
 
 	<h1> Lista de Clientes </h1><br><br>
 	<table class="table">
@@ -29,14 +34,9 @@
         <td>{{$endereco->cidade}}</td>
         <td>{{$endereco->estado}}</td>
         <td>{{$endereco->bairro}}</td>
-				<td>
-					<a href="/editar/cliente/{{$cliente->id}}">Editar</a> -
-					<a href="/remover/cliente/{{$cliente->id}}">Remover</a>
-				</td>
 			</tr>
 			@endforeach
 		</tbody>
 	</table>
-
-	<a href="/cadastrar/cliente"> Adicionar um Cliente</a>
+@endif
 @stop
