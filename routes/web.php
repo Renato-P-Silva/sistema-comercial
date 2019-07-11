@@ -55,7 +55,7 @@ Route::get('/relatorios/pedido', function(Request $request) {
     return view('/PedidoView/relatorio-pedido');
 })->name('/relatorios/pedido');
 Route::post('/relatorioCliente/pedido', 'PedidoController@gerar_relatorio_cliente')->name('/relatorioCliente/pedido');
-//Route::post('/relatorioBairro/cliente', 'ClienteController@gerar_relatorio_bairro')->name('/relatorioBairro/cliente');
+Route::post('/relatorioCliente/pedido', 'PedidoController@gerar_relatorio_tipo_entrega')->name('/relatorioCliente/pedido');
 
 
 //ROTAS DE CLIENTE

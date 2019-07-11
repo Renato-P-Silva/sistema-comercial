@@ -73,8 +73,17 @@ class PedidoController extends Controller
         return view('/PedidoView/relatorio-pedido-resultado', ['pedidos' => $pedidos]);
     }
 
-//     public function gerar_relatorio_cliente(Request $request){
-//
+    public function gerar_relatorio_tipo_entrega(Request $request){
+
+      $pedidos = Pedido::where('tipoentrega_id', 'ilike', '%' . $request->tipoentrega_id . '%')
+                    ->get();
+
+      // Necessario descomentar para executar os testes
+//            return $pedidos;
+
+      //Fluxo normal
+      return view('/PedidoView/relatorio-pedido-resultado', ['pedidos' => $pedidos]);
+
 //         $clientes = Cliente::where('cpf', 'ilike', '%' . $request->cpf . '%')
 //                       ->get();
 //         $pedidos = array();
@@ -87,7 +96,7 @@ class PedidoController extends Controller
 //
 //         //Fluxo normal
 //         return view('/ClienteView/relatorio-cliente-resultado', ['clientes' => $clientes]);
-//     }
+    }
 
 
 
