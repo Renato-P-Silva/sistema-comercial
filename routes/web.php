@@ -56,6 +56,7 @@ Route::get('/relatorios/pedido', function(Request $request) {
 })->name('/relatorios/pedido');
 Route::post('/relatorioCliente/pedido', 'PedidoController@gerar_relatorio_cliente')->name('/relatorioCliente/pedido');
 Route::post('/relatorioCliente/pedido', 'PedidoController@gerar_relatorio_tipo_entrega')->name('/relatorioCliente/pedido');
+Route::post('/relatorioCliente/pedido', 'PedidoController@gerar_relatorio_valor_minimo')->name('/relatorioCliente/pedido');
 
 
 //ROTAS DE CLIENTE

@@ -83,24 +83,24 @@ class PedidoController extends Controller
 
       //Fluxo normal
       return view('/PedidoView/relatorio-pedido-resultado', ['pedidos' => $pedidos]);
-
-//         $clientes = Cliente::where('cpf', 'ilike', '%' . $request->cpf . '%')
-//                       ->get();
-//         $pedidos = array();
-//         foreach ($clientes as $cliente) {
-//           $pedido = \App\Pedido::find($cliente->cliente_id);
-//           array_push($pedidos, $pedido);
-//         }
-//         // Necessario descomentar para executar os testes
-// //            return $clientes;
-//
-//         //Fluxo normal
-//         return view('/ClienteView/relatorio-cliente-resultado', ['clientes' => $clientes]);
     }
 
+      public function gerar_relatorio_valor_minimo(Request $request){
 
+        $pedidos = Pedido::all();
 
+        $pedidosMin = array();
+        foreach ($pedidos as $pedido) {
+          if($pedido->valor >= $request->valorminimo){
+            array_push($pedidosMin, $pedido);
+          }
+        }
 
+        // Necessario descomentar para executar os testes
+  //            return $pedidos;
 
+        //Fluxo normal
+        return view('/PedidoView/relatorio-pedido-resultado', ['pedidos' => $pedidosMin]);
+      }
 
 }
