@@ -51,6 +51,12 @@ Route::post('/salvar/pedido', 'PedidoController@salvar_pedido')->middleware('aut
 Route::get('/remover/pedido/{id}', 'PedidoController@remover_pedido')->middleware('auth');
 Route::post('/atualizar/pedido', 'PedidoController@atualizar_pedido')->middleware('auth');
 Route::get('/editar/pedido/{id}', 'PedidoController@get_view_atualizar')->middleware('auth');
+Route::get('/relatorios/pedido', function(Request $request) {
+    return view('/PedidoView/relatorio-pedido');
+})->name('/relatorios/pedido');
+Route::post('/relatorioCliente/pedido', 'PedidoController@gerar_relatorio_cliente')->name('/relatorioCliente/pedido');
+//Route::post('/relatorioBairro/cliente', 'ClienteController@gerar_relatorio_bairro')->name('/relatorioBairro/cliente');
+
 
 //ROTAS DE CLIENTE
 

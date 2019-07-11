@@ -59,8 +59,36 @@ class PedidoController extends Controller
         $pedido->update();
         return redirect("listar/pedido");
 
-
     }
+
+    public function gerar_relatorio_cliente(Request $request){
+
+        $pedidos = Pedido::where('cliente_id', 'ilike', '%' . $request->cliente_id . '%')
+                      ->get();
+
+        // Necessario descomentar para executar os testes
+//            return $pedidos;
+
+        //Fluxo normal
+        return view('/PedidoView/relatorio-pedido-resultado', ['pedidos' => $pedidos]);
+    }
+
+//     public function gerar_relatorio_cliente(Request $request){
+//
+//         $clientes = Cliente::where('cpf', 'ilike', '%' . $request->cpf . '%')
+//                       ->get();
+//         $pedidos = array();
+//         foreach ($clientes as $cliente) {
+//           $pedido = \App\Pedido::find($cliente->cliente_id);
+//           array_push($pedidos, $pedido);
+//         }
+//         // Necessario descomentar para executar os testes
+// //            return $clientes;
+//
+//         //Fluxo normal
+//         return view('/ClienteView/relatorio-cliente-resultado', ['clientes' => $clientes]);
+//     }
+
 
 
 

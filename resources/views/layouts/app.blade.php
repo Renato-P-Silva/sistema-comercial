@@ -66,6 +66,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{URL('listar/pedido')}}">Listar</a>
+                        <a class="dropdown-item" href="{{URL('relatorios/pedido')}}">Relatórios</a>
                     </div>
                 </li>
 
