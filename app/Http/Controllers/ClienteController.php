@@ -14,7 +14,7 @@ class ClienteController extends Controller
         {
             try {
 
-                //ClienteValidator::Validate($request->all());
+                ClienteValidator::Validate($request->all());
 
 
                 $cliente = new Cliente();
@@ -92,6 +92,7 @@ class ClienteController extends Controller
         }
 
         public function gerar_relatorio_cidade(Request $request){
+
             $enderecos = Endereco::where('cidade', 'ilike', '%' . $request->cidade . '%')
 													->get();
             $clientes = array();
@@ -99,6 +100,10 @@ class ClienteController extends Controller
               $cliente = \App\Cliente::find($endereco->cliente_id);
               array_push($clientes, $cliente);
             }
+            // Necessario descomentar para executar os testes
+//            return $clientes;
+
+            //Fluxo normal
             return view('/ClienteView/relatorio-cliente-resultado', ['clientes' => $clientes]);
         }
 
@@ -112,6 +117,10 @@ class ClienteController extends Controller
               array_push($clientes, $cliente);
             }
 
+            // Necessario descomentar para executar os testes
+//            return $clientes;
+
+//            //Fluxo normal
             return view('/ClienteView/relatorio-cliente-resultado', ['clientes' => $clientes]);
         }
 
