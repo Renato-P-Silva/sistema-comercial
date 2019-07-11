@@ -25,14 +25,11 @@
 			<tr>
         <td>{{$pedido->id}}</td>
 				<td>{{$pedido->valor}}</td>
-				<td>{{$pedido->produtos_id}}</td>
+				<td>{{$pedido->produto_id}}</td>
         <td>{{$pedido->cliente_id}}</td>
         <td>{{$pedido->tipoentrega_id}}</td>
         <td>{{$pedido->data}}</td>
 
-        <!-- // <td>
-				// 	<a href="/relatorios/pedido/">Voltar</a> -
-				// </td> -->
 			</tr>
 			@endforeach
 		</tbody>
