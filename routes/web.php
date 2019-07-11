@@ -60,3 +60,8 @@ Route::post('/salvar/cliente', 'ClienteController@cadastrar_cliente');
 Route::get('/editar/cliente/{id}', 'ClienteController@view_editar_cliente')->middleware('auth');
 Route::post('/atualizar/cliente','ClienteController@editar_cliente')->middleware('auth');
 Route::get('/remover/cliente/{id}', 'ClienteController@remover_cliente')->middleware('auth');
+Route::get('/relatorios/cliente', function(Request $request) {
+    return view('/ClienteView/relatorio-cliente');
+})->name('/relatorios/cliente');
+Route::post('/relatorioCidade/cliente', 'ClienteController@gerar_relatorio_cidade')->name('/relatorioCidade/cliente');
+Route::post('/relatorioBairro/cliente', 'ClienteController@gerar_relatorio_bairro')->name('/relatorioBairro/cliente');

@@ -12,6 +12,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{URL('salvar/cliente/')}}">
                         @csrf
+                        <input type="hidden" name="id" value=-1>
 
                         <div class="form-group row">
                             <label for="nome" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>

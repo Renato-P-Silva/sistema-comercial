@@ -8,6 +8,7 @@ class Cliente extends Model
 {
 
     //Rules configuradas diretamente no Validator para melhor validacao de campos unicos
+
     
   public static $messages = [
       'required' => 'O campo :attribute é obrigatório',
@@ -18,7 +19,7 @@ class Cliente extends Model
       'unique' => 'Este :attribute já existe',
       'telefone.min' => 'O campo :attribute deve ter no minimo 7 digitos',
       'telefone.max' => 'O campo :attribute deve ter no maximo 20 digitos',
-    
+
 
   ];
     public function endereco(){
