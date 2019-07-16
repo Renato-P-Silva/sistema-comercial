@@ -79,3 +79,11 @@ Route::get('/relatorios/cliente', function(Request $request) {
 })->name('/relatorios/cliente');
 Route::post('/relatorioCidade/cliente', 'ClienteController@gerar_relatorio_cidade')->name('/relatorioCidade/cliente');
 Route::post('/relatorioBairro/cliente', 'ClienteController@gerar_relatorio_bairro')->name('/relatorioBairro/cliente');
+
+//----ROTAS DE FORMA PAGAMENTO
+Route::get('/listar/formaPagamento', 'FormaPagamentoController@listar_formaPagamento')->middleware('auth');
+Route::get('/cadastrar/formaPagamento', 'FormaPagamentoController@view_cadastrar_formaPagamento')->middleware('auth');
+Route::post('/salvar/formaPagamento', 'FormaPagamentoController@cadastrar_formaPagamento')->middleware('auth');
+Route::get('/editar/formaPagamento/{id}', 'FormaPagamentoController@view_editar_formaPagamento')->middleware('auth');
+Route::post('/atualizar/formaPagamento','FormaPagamentoController@editar_formaPagamento')->middleware('auth');
+Route::get('/remover/formaPagamento/{id}', 'FormaPagamentoController@remover_formaPagamento')->middleware('auth');
