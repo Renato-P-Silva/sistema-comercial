@@ -61,4 +61,22 @@ class ProdutoController extends Controller
         $produto->delete();
         return redirect("listar\produto");
     }
+
+    public function gerar_relatorio_categoria(Request $request){
+
+        $categoria = Categoria::where('nome', 'ilike', '%' . $request->categoria . '%')->first();
+        if($categoria == null){
+            $produtos = [];
+        }else{
+            $produtos = Produto::where('categoria', '=', $categoria->id)->get();
+        }
+
+//         Necessario descomentar para executar os testes
+//            return $produtos;
+
+
+        //Fluxo normal
+        return view('/ProdutoView/relatorio-produto-resultado', ['produtos' => $produtos]);
+    }
+
 }
