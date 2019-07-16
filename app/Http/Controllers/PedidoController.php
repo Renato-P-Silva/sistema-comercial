@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pedido;
+use App\Produto;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -59,11 +60,93 @@ class PedidoController extends Controller
         $pedido->update();
         return redirect("listar/pedido");
 
-
     }
 
+    public function gerar_relatorio_cliente(Request $request){
 
+        $pedidos = Pedido::where('cliente_id', 'ilike', '%' . $request->cliente_id . '%')
+                      ->get();
 
+        // Necessario descomentar para executar os testes
+//            return $pedidos;
 
+        //Fluxo normal
+        return view('/PedidoView/relatorio-pedido-resultado', ['pedidos' => $pedidos]);
+    }
+
+    public function gerar_relatorio_tipo_entrega(Request $request){
+
+      $pedidos = Pedido::where('tipoentrega_id', 'ilike', '%' . $request->tipoentrega_id . '%')
+                    ->get();
+
+      // Necessario descomentar para executar os testes
+//            return $pedidos;
+
+      //Fluxo normal
+      return view('/PedidoView/relatorio-pedido-resultado', ['pedidos' => $pedidos]);
+    }
+
+      public function gerar_relatorio_valor_minimo(Request $request){
+
+        $pedidos = Pedido::all();
+
+        $pedidosMin = array();
+        foreach ($pedidos as $pedido) {
+          if($pedido->valor >= $request->valorminimo){
+            array_push($pedidosMin, $pedido);
+          }
+        }
+
+        // Necessario descomentar para executar os testes
+  //            return $pedidos;
+
+        //Fluxo normal
+        return view('/PedidoView/relatorio-pedido-resultado', ['pedidos' => $pedidosMin]);
+      }
+
+      public function gerar_relatorio_produto(Request $request){
+
+        $pedidos = Pedido::where('produto_id', 'ilike', '%' . $request->produto_id . '%')
+                      ->get();
+
+        // Necessario descomentar para executar os testes
+//            return $pedidos;
+
+        //Fluxo normal
+        return view('/PedidoView/relatorio-pedido-resultado', ['pedidos' => $pedidos]);
+      }
+
+      public function gerar_relatorio_data(Request $request){
+
+        $pedidos = Pedido::whereBetween('data', array($request->data_inicio, $request->data_final))->get();
+
+        // Necessario descomentar para executar os testes
+  //            return $pedidos;
+
+        //Fluxo normal
+        return view('/PedidoView/relatorio-pedido-resultado', ['pedidos' => $pedidos]);
+      }
+
+      public function gerar_relatorio_categoria(Request $request){
+
+        $produtos = Produto::where('categoria', 'ilike', '%' . $request->categoria . '%')
+                      ->get();
+        $pedidos = Pedido::all();
+
+        $pedidosMin = array();
+        foreach ($pedidos as $pedido) {
+          foreach ($produtos as $produto) {
+            if($produto->id == $pedido->produto_id){
+              array_push($pedidosMin, $pedido);
+            }
+          }
+        }
+
+        // Necessario descomentar para executar os testes
+  //            return $pedidos;
+
+        //Fluxo normal
+        return view('/PedidoView/relatorio-pedido-resultado', ['pedidos' => $pedidosMin]);
+      }
 
 }
