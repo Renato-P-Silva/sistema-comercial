@@ -90,6 +90,11 @@ Route::get('/remover/formaPagamento/{id}', 'FormaPagamentoController@remover_for
 
 //----ROTAS DE VENDAS
 Route::get('/listar/venda', 'VendaController@listar_venda')->middleware('auth');
+Route::get('/relatorio/venda/', function(Request $request) {
+    return view('/VendaView/relatorio-venda');
+})->name('/relatorio/venda/');
+Route::post('/relatorioFormaPagamento/venda', 'VendaController@gerar_relatorio_forma_pagamento')->name('/relatorioFormaPagamento/venda');
+Route::post('/relatorioValorMinimo/venda', 'VendaController@gerar_relatorio_valor_minimo')->name('/relatorioValorMinimo/venda');
 Route::get('/cadastrar/venda', 'VendaController@view_cadastrar_venda')->middleware('auth');
 Route::post('/salvar/venda', 'VendaController@cadastrar_venda')->middleware('auth');
 Route::get('/editar/venda/{id}', 'VendaController@view_editar_venda')->middleware('auth');
