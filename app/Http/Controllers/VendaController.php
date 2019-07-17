@@ -6,6 +6,7 @@ use App\FormaPagamento;
 use App\Validator\VendaValidator;
 use App\Pedido;
 use App\Venda;
+use App\Cliente;
 use Illuminate\Http\Request;
 
 class VendaController extends Controller
@@ -66,6 +67,34 @@ class VendaController extends Controller
         $venda = Venda::find($request->id);
         $venda->delete();
         return redirect("listar/venda");
+    }
+
+    public function gerar_relatorio_cliente(Request $request){
+        $vendas = array();
+        $cliente = Cliente::where('nome', 'ilike', '%'. $request->cliente. '%')->first();
+        if(!empty($cliente)){
+          $pedidos =  Pedido::where('cliente_id', '=', $cliente->id)->get();
+
+          foreach ($pedidos as $pedido) {
+            $venda =  Venda::where('pedido_id', '=', $pedido->id)->first();
+            array_push($vendas, $venda);
+          }
+        }
+
+
+        return view('/VendaView/relatorio-venda-resultado', ['vendas' => $vendas]);
+    }
+
+    public function gerar_relatorio_tipo_entrega(Request $request){
+      $pedidos =  Pedido::where('tipoentrega_id', 'ilike', '%' . $request->tipoentrega . '%')
+                    ->get();
+      $vendas = array();
+      foreach ($pedidos as $pedido) {
+        $venda =  Venda::where('pedido_id', '=', $pedido->id)->first();
+        array_push($vendas, $venda);
+      }
+
+      return view('/VendaView/relatorio-venda-resultado', ['vendas' => $vendas]);
     }
 
 }
