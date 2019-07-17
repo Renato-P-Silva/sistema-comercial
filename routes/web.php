@@ -87,3 +87,11 @@ Route::post('/salvar/formaPagamento', 'FormaPagamentoController@cadastrar_formaP
 Route::get('/editar/formaPagamento/{id}', 'FormaPagamentoController@view_editar_formaPagamento')->middleware('auth');
 Route::post('/atualizar/formaPagamento','FormaPagamentoController@editar_formaPagamento')->middleware('auth');
 Route::get('/remover/formaPagamento/{id}', 'FormaPagamentoController@remover_formaPagamento')->middleware('auth');
+
+//----ROTAS DE VENDAS
+Route::get('/listar/venda', 'VendaController@listar_venda')->middleware('auth');
+Route::get('/cadastrar/venda', 'VendaController@view_cadastrar_venda')->middleware('auth');
+Route::post('/salvar/venda', 'VendaController@cadastrar_venda')->middleware('auth');
+Route::get('/editar/venda/{id}', 'VendaController@view_editar_venda')->middleware('auth');
+Route::post('/atualizar/venda','VendaController@editar_venda')->middleware('auth');
+Route::get('/remover/venda/{id}', 'VendaController@remover_venda')->middleware('auth');
