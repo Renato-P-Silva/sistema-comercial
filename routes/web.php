@@ -100,3 +100,8 @@ Route::post('/salvar/venda', 'VendaController@cadastrar_venda')->middleware('aut
 Route::get('/editar/venda/{id}', 'VendaController@view_editar_venda')->middleware('auth');
 Route::post('/atualizar/venda','VendaController@editar_venda')->middleware('auth');
 Route::get('/remover/venda/{id}', 'VendaController@remover_venda')->middleware('auth');
+Route::get('/relatorios/venda', function(Request $request) {
+    return view('/VendaView/relatorio-venda');
+})->name('/relatorios/venda');
+Route::post('/relatorioCliente/venda', 'VendaController@gerar_relatorio_cliente')->name('/relatorioCliente/venda');
+Route::post('/relatorioEntrega/venda', 'VendaController@gerar_relatorio_tipo_entrega')->name('/relatorioEntrega/venda');
