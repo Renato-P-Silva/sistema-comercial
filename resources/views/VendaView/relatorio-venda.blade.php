@@ -35,8 +35,17 @@
 
                             </div>
                         </div>
-                        
-        <form method="POST" action="{{ route('/relatorioFormaPagamento/venda') }}">
+
+                          <div class="form-group row mb-0">
+                              <div class="col-md-6 offset-md-4">
+                                  <button type="submit" class="btn btn-primary">
+                                      Buscar
+                                  </button>
+                              </div>
+                          </div>
+                      </form>
+
+                          <form method="POST" action="{{ route('/relatorioFormaPagamento/venda') }}">
             {{ csrf_field() }}
             @csrf
 

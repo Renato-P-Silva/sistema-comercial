@@ -81,20 +81,31 @@ class VendaController extends Controller
           }
         }
 
+        $sum = 0;
+        foreach ($vendas as $venda){
+            $sum += $venda->pedido->valor;
+        }
 
-        return view('/VendaView/relatorio-venda-resultado', ['vendas' => $vendas]);
+        return view('/VendaView/relatorio-venda-resultado', ['vendas' => $vendas, 'total' => $sum]);
     }
 
-    public function gerar_relatorio_tipo_entrega(Request $request){
-      $pedidos =  Pedido::where('tipoentrega_id', 'ilike', '%' . $request->tipoentrega . '%')
-                    ->get();
-      $vendas = array();
-      foreach ($pedidos as $pedido) {
-        $venda =  Venda::where('pedido_id', '=', $pedido->id)->first();
-        array_push($vendas, $venda);
-      }
+    public function gerar_relatorio_tipo_entrega(Request $request)
+    {
+        $pedidos = Pedido::where('tipoentrega_id', 'ilike', '%' . $request->tipoentrega . '%')
+            ->get();
+        $vendas = array();
+        foreach ($pedidos as $pedido) {
+            $venda = Venda::where('pedido_id', '=', $pedido->id)->first();
+            array_push($vendas, $venda);
+        }
 
-      return view('/VendaView/relatorio-venda-resultado', ['vendas' => $vendas]);
+        $sum = 0;
+        foreach ($vendas as $venda){
+            $sum += $venda->pedido->valor;
+        }
+
+        return view('/VendaView/relatorio-venda-resultado', ['vendas' => $vendas, 'total'=> $sum]);
+    }
       
     public function gerar_relatorio_forma_pagamento(Request $request){
 
