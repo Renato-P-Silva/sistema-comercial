@@ -16,4 +16,13 @@ class Venda extends Model
     ];
     public static $messages = [
         'required' => 'O campo :attribute eh obrigatorio',
-    ];}
+    ];
+
+    public function pedido(){
+        return $this->belongsTo(\App\Pedido::class);
+    }
+
+    public function formapagamento(){
+        return $this->belongsTo(\App\FormaPagamento::class);
+    }
+}
