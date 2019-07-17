@@ -68,4 +68,30 @@ class VendaController extends Controller
         return redirect("listar/venda");
     }
 
+    public function gerar_relatorio_forma_pagamento(Request $request){
+
+        $vendas = Venda::where('formapagamento_id', 'ilike', '%' . $request->formapagamento_id . '%')
+            ->get();
+        $sum = 0;
+        foreach ($vendas as $venda){
+            $sum += $venda->pedido->valor;
+        }
+        return view('/VendaView/relatorio-venda-resultado', ['vendas' => $vendas, 'total' => $sum]);
+    }
+
+    public function gerar_relatorio_valor_minimo(Request $request){
+        $vendas = Venda::all();
+        $vendasMin = array();
+        foreach ($vendas as $venda) {
+            if($venda->pedido->valor >= $request->valorminimo){
+                array_push($vendasMin, $venda);
+            }
+        }
+        $sum = 0;
+        foreach ($vendas as $venda){
+            $sum += $venda->pedido->valor;
+        }
+        return view('/VendaView/relatorio-venda-resultado', ['vendas' => $vendasMin, 'total' => $sum]);
+    }
+
 }
