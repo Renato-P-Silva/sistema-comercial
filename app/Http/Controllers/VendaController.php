@@ -7,6 +7,7 @@ use App\Validator\VendaValidator;
 use App\Pedido;
 use App\Venda;
 use App\Cliente;
+use App\Produto;
 use Illuminate\Http\Request;
 
 class VendaController extends Controller
@@ -132,5 +133,78 @@ class VendaController extends Controller
         }
         return view('/VendaView/relatorio-venda-resultado', ['vendas' => $vendasMin, 'total' => $sum]);
     }
+
+    public function gerar_relatorio_periodo(Request $request){
+
+        $vendas = Venda::whereBetween('data_venda', array($request->data_inicio, $request->data_final))->get();
+
+        // Necessario descomentar para executar os testes
+        //            return $vendas;
+
+        $sum = 0;
+        foreach ($vendas as $venda){
+            $sum += $venda->pedido->valor;
+        }
+
+        //Fluxo normal
+        return view('/VendaView/relatorio-venda-resultado', ['vendas' => $vendas, 'total' => $sum]);
+    }
+
+    public function gerar_relatorio_produto(Request $request){
+
+        $pedidos = Pedido::Where('produto_id', 'ilike', '%' . $request->produto_id . '%')->get();
+
+        $vendas = array();
+        foreach ($pedidos as $pedido) {
+            $venda = $pedido->venda;
+            array_push($vendas, $venda);
+        }
+
+        $sum = 0;
+        foreach ($vendas as $venda){
+            $sum += $venda->pedido->valor;
+        }
+
+        // Necessario descomentar para executar os testes
+//            return $vendas;
+
+        //Fluxo normal
+        return view('/VendaView/relatorio-venda-resultado', ['vendas' => $vendas, 'total' => $sum]);
+    }
+
+    public function gerar_relatorio_categoria(Request $request){
+
+        $produtos = Produto::where('categoria', 'ilike', '%' . $request->categoria . '%')
+            ->get();
+        $pedidos = Pedido::all();
+
+        $pedidosMin = array();
+        foreach ($pedidos as $pedido) {
+            foreach ($produtos as $produto) {
+                if($produto->id == $pedido->produto_id){
+                    array_push($pedidosMin, $pedido);
+                }
+            }
+        }
+
+        $vendas = array();
+        foreach ($pedidosMin as $pedido) {
+            $venda = $pedido->venda;
+            array_push($vendas, $venda);
+        }
+
+        $sum = 0;
+        foreach ($vendas as $venda){
+            $sum += $venda->pedido->valor;
+        }
+
+
+        // Necessario descomentar para executar os testes
+        //            return $pedidos;
+
+        //Fluxo normal
+        return view('/VendaView/relatorio-venda-resultado', ['vendas' => $vendas, 'total' => $sum]);
+    }
+
 
 }

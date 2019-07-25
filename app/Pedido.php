@@ -16,4 +16,8 @@ class Pedido extends Model
     public static $messages = [
       'required' => 'O campo :attribute eh obrigatorio',
     ];
+
+    public function venda(){
+        return $this->hasOne(\App\Venda::class);
+    }
 }

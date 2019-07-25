@@ -105,3 +105,6 @@ Route::get('/relatorios/venda', function(Request $request) {
 })->name('/relatorios/venda');
 Route::post('/relatorioCliente/venda', 'VendaController@gerar_relatorio_cliente')->name('/relatorioCliente/venda');
 Route::post('/relatorioEntrega/venda', 'VendaController@gerar_relatorio_tipo_entrega')->name('/relatorioEntrega/venda');
+Route::post('/relatorioPeriodo/venda', 'VendaController@gerar_relatorio_periodo')->name('/relatorioPeriodo/venda');
+Route::post('/relatorioProduto/venda', 'VendaController@gerar_relatorio_produto')->name('/relatorioProduto/venda');
+Route::post('/relatorioCategoria/venda', 'VendaController@gerar_relatorio_categoria')->name('/relatorioCategoria/venda');
